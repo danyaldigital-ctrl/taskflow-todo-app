@@ -168,3 +168,21 @@ body {
         width: 100%;
     }
 }
+/* Improved visual feedback */
+
+.task {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.delete-btn {
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+    transform: scale(1.05);
+}
