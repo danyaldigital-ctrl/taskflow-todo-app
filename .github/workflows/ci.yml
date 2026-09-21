@@ -1,0 +1,39 @@
+name: TaskFlow CI
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f script.js
+          echo "All required files are present."
+
+      - name: Validate HTML
+        run: |
+          grep -q "<!DOCTYPE html>" index.html
+          grep -q "<script" index.html
+          grep -q "<link" index.html
+          echo "HTML validation passed."
+
+      - name: Check JavaScript
+        run: |
+          grep -q "function addTask" script.js
+          grep -q "function deleteTask" script.js
+          echo "JavaScript checks passed."
+
+      - name: CI successful
+        run: echo "TaskFlow CI checks completed successfully!"
