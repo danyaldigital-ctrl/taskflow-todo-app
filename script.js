@@ -2,6 +2,7 @@ const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 const taskCount = document.getElementById("taskCount");
+const completedCount = document.getElementById("completedCount");
 const clearCompletedBtn = document.getElementById("clearCompleted");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -126,12 +127,14 @@ function updateTaskCount() {
     const remainingTasks =
         tasks.filter(task => !task.completed).length;
 
-    if (remainingTasks === 1) {
-        taskCount.textContent = "1 task remaining";
-    } else {
-        taskCount.textContent =
-            `${remainingTasks} tasks remaining`;
-    }
+    const completedTasks =
+        tasks.filter(task => task.completed).length;
+
+    taskCount.textContent =
+        `${remainingTasks} tasks remaining`;
+
+    completedCount.textContent =
+        ` | ${completedTasks} completed`;
 }
 
 addTaskBtn.addEventListener("click", addTask);
